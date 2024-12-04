@@ -3,6 +3,8 @@ changeTheme();
 
 let noOfPosts;
 
+
+
 function changeTheme() {
     if (localStorage.getItem("ModeColor") == "dark") {
         document.documentElement.style.setProperty('--light', "#2f3046")
@@ -30,6 +32,18 @@ function changeTheme() {
     }
 
 }
+
+document.querySelectorAll('.socialLogo').forEach(icon => {
+    icon.addEventListener('click', () => {
+        // Remove 'logobg' class from all icons
+        document.querySelectorAll('.socialLogo').forEach(el => el.classList.remove('logobg'));
+        
+        // Add 'logobg' class to the clicked icon
+        icon.classList.add('logobg');
+    });
+});
+
+
 
 document.getElementById("signupButton").addEventListener('click', function () {
     window.location = "login"
@@ -59,28 +73,45 @@ function changeMode() {
     changeTheme();
 }
 
+
+
+document.querySelectorAll('.socialLogo').forEach(icon => {
+    icon.addEventListener('click', () => {
+        // Remove 'logobg' class from all icons
+        document.querySelectorAll('.socialLogo').forEach(el => el.classList.remove('logobg'));
+        
+        // Add 'logobg' class to the clicked icon
+        icon.classList.add('logobg');
+    });
+});
+
+let userMedia; 
+document.querySelectorAll('.socialLogo').forEach(icon => {
+    icon.addEventListener('click', function() {
+        // Log the value of the clicked icon
+        userMedia = this.getAttribute('value');
+    });
+});
+
+
+
+
 document.getElementById('btnStart').addEventListener('click', () => {
-
-
     const username = document.getElementById('socialUsername').value;
-
     if (username == "") {
         return alert("Username can't be Empty ⚠️")
     }
-
     if (document.getElementById('testType').value == "1") {
-
         document.getElementById('progressData').innerHTML = ''
-
         let update = document.createElement('p')
         update.className = 'workingStyle'
-
         update.innerHTML = '🟢 ' + 'Verifying Profile...'
-
         document.getElementById('progressData').appendChild(update)
-        
 
-        fetch('/detect_fraud_profile', {
+        console.log(`/${userMedia}`)
+        
+        fetch(`/${userMedia}`, {
+            
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -104,33 +135,7 @@ document.getElementById('btnStart').addEventListener('click', () => {
                 console.log(error);
             }
         );
-        
-        //twitter
-        fetch('/detect_x', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username: username })
-        })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-
-                if (data.error) {
-
-                    dataErrorDisplay(data)
-
-                }
-                else {
-                    dataProgressDisplay(username)
-                }
-            })
-            .catch(error => {
-                console.log(error);
-            }
-        );
-
+       
     }
 
 });

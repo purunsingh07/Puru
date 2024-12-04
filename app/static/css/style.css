@@ -234,10 +234,10 @@ i{
     
 }
 
-#instagramLogo{
- 
+.logobg{
     background-color: var(--material);
 }
+
 
 input{
 
