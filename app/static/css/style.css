@@ -6,11 +6,12 @@
 }
 
 :root {
-    --dark: #7FC7D9;
-    --light: #DCF2F1;
-    --material: #0F1035;
-    --text: black;
+   --dark:#2c3e50;
+    --light:#f8f9fa;
+    --material: #1abc9c;
+    --text:#ecf0f1;
     --lightText: #ffffff ;
+    --primary-bg1:#f8f9fa;
 }
 
 body {

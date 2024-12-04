@@ -34,6 +34,6 @@ def serve_json(username, profile_name, filename):
 def cyber():
     return render_template('cyber.html')
 
-@app.route('/cyberreport')
-def cyberreport():
-    return  render_template('cyberreport.html')
+@app.route('/puru')
+def puru():
+    return  render_template('creport.html')

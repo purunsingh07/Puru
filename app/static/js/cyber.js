@@ -60,5 +60,5 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.getElementById("cyberreport").addEventListener('click',function(){
-    window.location="cyberreport"
+    window.location="/puru"
 })
