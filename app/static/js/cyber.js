@@ -58,7 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("theme", isLightMode ? "light" : "dark");
   });
 });
+document.getElementById("cyberreport").addEventListener('click', function () {
+  window.location = "cyberreport"
+})
 
-document.getElementById("cyberreport").addEventListener('click',function(){
-    window.location="/puru"
+document.getElementById("cyberhistory").addEventListener('click', function () {
+  window.location = "cyberhistory"
 })

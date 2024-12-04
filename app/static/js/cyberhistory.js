@@ -63,3 +63,9 @@ const historyData = [
       localStorage.setItem("theme", isLightMode ? "light" : "dark");
     });
   });
+  document.getElementById("cyberreport").addEventListener('click', function () {
+    window.location = "cyberreport"
+  })
+  document.getElementById("cyber").addEventListener('click', function () {
+    window.location = "cyber"
+  })

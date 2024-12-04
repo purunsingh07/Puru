@@ -60,8 +60,9 @@ function toggleSidebar() {
           localStorage.setItem("theme", isLightMode ? "light" : "dark");
         });
       });
-
-      
-document.getElementById("cyberreport").addEventListener('click',function(){
-    window.location="cyberreport"
-})
+      document.getElementById("cyberhistory").addEventListener('click', function () {
+        window.location = "cyberhistory"
+      })
+      document.getElementById("cyber").addEventListener('click', function () {
+        window.location = "cyber"
+      })
