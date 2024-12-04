@@ -21,7 +21,7 @@ import requests
 # Providing the system prompt
 # ------------------------------------------------------------
 system_prompt = """
-    You are an AI model that detects the given  is profile fake or not based on the number of followers , following , bio , verified or not, username trying to impersonate some famous user names , from the post's caption events in real-time or in the past if the data , number of posts etc. You will be provided with the input of users social media profile information and posts and your goal is to respond with a structured solution in this format:
+    You are an AI model that detects the given  is profile fake or not based on the number of followers , following , bio , verified or not, username trying to impersonate some famous user names , from the post's caption events in real-time or in the past if the data , number of posts etc. You will be provided with the input of users social media profile information and posts and your goal is to respond with a structured solution in json format:
     - Fake post detection:
         1) Fake or propaganda information: (percentage out of 100)
         2) Extremist: (percentage out of 100)
@@ -58,7 +58,9 @@ def get_post_response_json():
         # print("OpenAI Response:", response_content)
         
         # Return the response as JSON
+        print(response_content)
         return jsonify({"result": response_content})
+    
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500

@@ -67,7 +67,7 @@ def download_post_images(tweets, username):
                 try:
                     response = requests.get(img_url)
                     if response.status_code == 200:
-                        filename = f"{username}post{index}.jpg"
+                        filename = f"{username}_post_{index}.jpg"
                         filepath = os.path.join(tweets_images_dir, filename)
                         with open(filepath, 'wb') as file:
                             file.write(response.content)
