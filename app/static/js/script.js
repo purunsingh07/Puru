@@ -43,6 +43,8 @@ document.getElementById("Reports").addEventListener('click',function(){
     window.location="reports"
 })
 
+
+
 function changeMode() {
 
     if (localStorage.getItem("ModeColor") == "light") {

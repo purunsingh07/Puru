@@ -33,3 +33,7 @@ def serve_json(username, profile_name, filename):
 @app.route('/cyber')
 def cyber():
     return render_template('cyber.html')
+
+@app.route('/cyberreport')
+def cyberreport():
+    return  render_template('cyberreport.html')
