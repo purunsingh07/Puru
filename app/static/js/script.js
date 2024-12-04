@@ -104,6 +104,32 @@ document.getElementById('btnStart').addEventListener('click', () => {
                 console.log(error);
             }
         );
+        
+        //twitter
+        fetch('/detect_x', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username: username })
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+
+                if (data.error) {
+
+                    dataErrorDisplay(data)
+
+                }
+                else {
+                    dataProgressDisplay(username)
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            }
+        );
 
     }
 
