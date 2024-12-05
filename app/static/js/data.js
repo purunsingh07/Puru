@@ -57,3 +57,62 @@ function fetch_data(jsonFilePath, retryCount = 5, retryInterval = 2000) {
             }
         });
 }
+
+
+
+
+// /fetch the open ai data remain
+// let riskpercentage =51
+// if (riskpercentage > 50) {
+//     btn.classList.remove('none');
+//   } else {
+//     btn.classList.add('none');
+//   }
+import { initializeApp} from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDocs, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBuNvUaahEA1efQ2S3Wg_-yzesWIIZsrcg",
+  authDomain: "fake-social-media-detect-ae562.firebaseapp.com",
+  projectId: "fake-social-media-detect-ae562",
+  storageBucket: "fake-social-media-detect-ae562.firebasestorage.app",
+  messagingSenderId: "984530461675",
+  appId: "1:984530461675:web:f7213840d97c9bf868efae"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+document.getElementById("btnreport").addEventListener('click' ,async(e) =>{
+    e.preventDefault();
+    try {
+          await addDoc(collection(db, "reportedAccounts"), {
+            
+            Username : Username ,
+            Name : Name,
+            Bio : Bio,
+            Followers : Followers,
+            Following : Following,
+            NumberOfPosts : NumberOfPosts,
+            Verified : Verified,
+            AccountPrivacy: AccountPrivacy,
+            timestamp: serverTimestamp(),
+            status: "Pending",
+          });
+          alert("Account reported successfully!");
+      } catch (error) {
+        console.error("Error reporting account:", error);
+        alert("Failed to report the account.");
+      }
+
+});
+
+
+
+
+
+
+
+

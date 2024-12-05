@@ -9,11 +9,12 @@ function changeTheme() {
     if (localStorage.getItem("ModeColor") == "dark") {
         document.documentElement.style.setProperty('--light', "#2f3046")
         document.documentElement.style.setProperty('--dark', "#14152a")
-        document.documentElement.style.setProperty('--material', "#3a3fc5")
+        document.documentElement.style.setProperty('--material', "#1ABC9C")
         document.documentElement.style.setProperty('--text', "#ffffff")
         document.documentElement.style.setProperty('--darkText', "#ffffff")
         document.documentElement.style.setProperty('--primary-bg1', "#14152a")
         document.documentElement.style.setProperty('--select', "#2f3046")
+        document.documentElement.style.setProperty('--Icon-bg', "#1ABC9C")
 
         document.getElementById("modeColor").className = "fa-solid fa-sun";
 
@@ -27,6 +28,7 @@ function changeTheme() {
         document.documentElement.style.setProperty('--darkText', "black")
         document.documentElement.style.setProperty('--primary-bg1', "#BBD4D4")
         document.documentElement.style.setProperty('--select', "white")
+        document.documentElement.style.setProperty('--Icon-bg', "#1f2830")
         localStorage.setItem("ModeColor", "light");
 
         document.getElementById("modeColor").className = "fa-solid fa-moon";

@@ -6,13 +6,15 @@
 }
 
 :root {
-    --dark: #7FC7D9;
-    --light: #DCF2F1;
-    --material: #0F1035;
-    --text: black;
-    --lightText: #ffffff ;
-}
-
+    --dark:#2c3e50;
+     --light:#f8f9fa;
+     --material: #1abc9c;
+     --text:#ecf0f1;
+     --darkText: black;
+     --primary-bg1:#f8f9fa;
+     --select: white;
+     --Icon-bg: #2f3b49;
+ }
 body {
     width: 100%;
     height: 100vh;
@@ -144,44 +146,51 @@ i{
 }
 
 
-.usersurvey{
-    display: grid;
-    grid-template-rows: 0.5fr .5fr .5fr;
-    align-content: center;
-    align-items: center;
-    gap: 3rem;
-    margin: 40px;
-    padding: 30px;
-    background-color: var(--dark);
-    margin-left: 50px;
-    margin-right: 50px;
+.container {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+#searchBar {
+    padding: 10px;
+    width: 80%;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: larger;
 }
-.reportdetail{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    gap: 5rem;
-    grid-template-columns: 1fr 1fr 1fr;
-    font-weight: 600;
-}
-.img{
-    padding: 0;
-    width: 4rem;
-    height: 3rem;
-}
+  
 
-.usersurvey h1{
-  text-align: center;
+.filter-btn {
+    padding: 15px 30px;
+    background-color:var(--material);
+    color: var(--darkText);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: large;
 }
-.graph{
-    display: flex;
-    background-color: var(--dark);
-    padding: 150px;
-    margin: 160px;
+  
+  /* Table styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--primary-bg1);
+  }
+  
+  thead {
+    background-color: #30b9a4;
+    color: white;
+  }
+  
+  th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: large;
 }
-.reportd{
-    display: flex;
-    gap: 2rem;
-    align-content: center;
-}
+  
+  tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  

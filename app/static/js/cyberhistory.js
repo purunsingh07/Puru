@@ -1,44 +1,40 @@
-// Sample data for the history table
-const historyData = [
-    {
-      date: "13-03-2004",
-      userId: "_PRATIKSHA_",
-      accLink: "www.instagram.com",
-      status: "Resolved",
-      platform: "Instagram",
-    },
-    {
-      date: "21-02-2004",
-      userId: "_jiyaa_21",
-      accLink: "www.facebook.com",
-      status: "Pending",
-      platform: "Facebook",
-    },
-    {
-      date: "15-05-2004",
-      userId: "fake_acc_123",
-      accLink: "www.twitter.com",
-      status: "Under Review",
-      platform: "Twitter",
-    },
-  ];
-  
-  // Dynamically populate the table
+import { getFirestore, getDocs, collection } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBuNvUaahEA1efQ2S3Wg_-yzesWIIZsrcg",
+  authDomain: "fake-social-media-detect-ae562.firebaseapp.com",
+  projectId: "fake-social-media-detect-ae562",
+  storageBucket: "fake-social-media-detect-ae562.firebasestorage.app",
+  messagingSenderId: "984530461675",
+  appId: "1:984530461675:web:f7213840d97c9bf868efae"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function fetchHistoryData() {
+  const historyRef = collection(db, "history");
+  const querySnapshot = await getDocs(historyRef);
   const tableBody = document.getElementById("history-data");
-  
-  historyData.forEach((data) => {
+
+  querySnapshot.forEach(doc => {
+    const accountData = doc.data();
+    
     const row = document.createElement("tr");
-  
     row.innerHTML = `
-      <td>${data.date}</td>
-      <td>${data.userId}</td>
-      <td><a href="https://${data.accLink}" target="_blank">${data.accLink}</a></td>
-      <td>${data.status}</td>
-      <td>${data.platform}</td>
+      <td>${accountData.date}</td>
+      <td>${accountData.Username}</td>
+      <td><a href="https://${accountData.profileLink}" target="_blank">${accountData.profileLink}</a></td>
+      <td>${accountData.status}</td>
+      <td>${accountData.platform}</td>
     `;
-  
     tableBody.appendChild(row);
   });
+}
+
+fetchHistoryData();
+
   function toggleSidebar() {
     const sidebar = document.querySelector('.sidebar');
     sidebar.classList.toggle('active');

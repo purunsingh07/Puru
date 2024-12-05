@@ -13,6 +13,7 @@
     --darkText: black;
     --primary-bg1:#f8f9fa;
     --select: white;
+    --Icon-bg: #2f3b49;
 }
 
 body {
@@ -245,7 +246,7 @@ i{
 }
 
 .logobg{
-    background-color: var(--material);
+    background-color: var(--Icon-bg);
 }
 
 
@@ -253,7 +254,7 @@ input{
 
     width: 60%;
     height: 5vh;
-    background-color: var(--dark);
+    background-color: var(--primary-bg1);
     border-width: 0px 0px 2px 0px;
     border-color: var(--light);
     outline: none;
@@ -314,8 +315,11 @@ select:focus{
     background-color: rgb(156, 156, 22);
 }
 
+.none{
+    display: none;
+}
 
-#btnStart{
+#btnStart, #btnreport{
     width: 30%;
     height: 6.6vh;
     background-color: var(--material);
