@@ -10,8 +10,9 @@
     --light:#f8f9fa;
     --material: #1abc9c;
     --text:#ecf0f1;
-    --lightText: #ffffff ;
+    --darkText: black;
     --primary-bg1:#f8f9fa;
+    --select: white;
 }
 
 body {
@@ -19,10 +20,11 @@ body {
     height: 100vh;
     background-color: var(--light);
     user-select: none;
-    color: var(--material);
+    color: var(--text);
     font-family: 'Open Sans';
     overflow: hidden;
 }
+
 
 ::-webkit-scrollbar {
     display: none;
@@ -32,7 +34,15 @@ body {
     font-weight: 600;
     font-size: 28px;
     padding-left: 3%;
+    color: var(--material);
 }
+
+#testType{
+    background-color: var(--select);
+    color: var(--darkText) ;
+}
+
+
 
 #appL1 {
     width: 10%;
@@ -171,7 +181,7 @@ i{
 .freeDetection{
     width: 60%;
     height: 80vh;
-    background-color:var(--dark);
+    background-color:var(--primary-bg1);
     display: block;
     margin: auto;
     margin-left: 9.5%;

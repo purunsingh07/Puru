@@ -11,19 +11,22 @@ function changeTheme() {
         document.documentElement.style.setProperty('--dark', "#14152a")
         document.documentElement.style.setProperty('--material', "#3a3fc5")
         document.documentElement.style.setProperty('--text', "#ffffff")
-        document.documentElement.style.setProperty('--lightText', "#ffffff")
+        document.documentElement.style.setProperty('--darkText', "#ffffff")
+        document.documentElement.style.setProperty('--primary-bg1', "#14152a")
+        document.documentElement.style.setProperty('--select', "#2f3046")
 
         document.getElementById("modeColor").className = "fa-solid fa-sun";
 
         document.getElementById('progressData').style.backgroundColor = '#14152a'
     }
     else {
-        document.documentElement.style.setProperty('--light', "#DCF2F1")
-        document.documentElement.style.setProperty('--dark', "#7FC7D9")
-        document.documentElement.style.setProperty('--material', "#0F1035")
-        document.documentElement.style.setProperty('--text', "black")
-        document.documentElement.style.setProperty('--lightText', "#ffffff")
-
+        document.documentElement.style.setProperty('--light', "#F8F9FA")
+        document.documentElement.style.setProperty('--dark', "#2C3E50")
+        document.documentElement.style.setProperty('--material', "#1ABC9C")
+        document.documentElement.style.setProperty('--text', "#ECF0F1")
+        document.documentElement.style.setProperty('--darkText', "black")
+        document.documentElement.style.setProperty('--primary-bg1', "#BBD4D4")
+        document.documentElement.style.setProperty('--select', "white")
         localStorage.setItem("ModeColor", "light");
 
         document.getElementById("modeColor").className = "fa-solid fa-moon";
