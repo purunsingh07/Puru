@@ -3,8 +3,14 @@ from flask import Flask, jsonify, request
 from app import app
 import requests
 import json
+import os
 
-model = joblib.load(r"C:\Users\PURU SINGH\OneDrive\Desktop\Tech-Simp-2\app\tests\FraudDetection\fraud_detection_model.joblib")
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+model_path = os.path.join(current_dir, "fraud_detection_model.joblib")
+
+
+model = joblib.load(model_path)
 
 @app.route('/fraud_result', methods=['POST'])
 def fraud_result():
