@@ -173,7 +173,7 @@ def fetch_user_posts(page_url,username):
                         image_response = requests.get(photo_image_url, stream=True)
                         if image_response.status_code == 200:
                             # image_path = base_dir/f"{username}posts/{post.get('details', {}).get(f'{username}_post{i}')}.jpg"
-                            image_path = os.path.join(post_dir, f'{username}post{i}.jpg')
+                            image_path = os.path.join(post_dir, f'{username}_post_{i}.jpg')
                             with open(image_path, "wb") as file:
                                 for chunk in image_response.iter_content(1024):
                                     file.write(chunk)
