@@ -1,10 +1,17 @@
 import requests
 import json
 import os
-from flask import Flask, render_template, request ,jsonify
 import requests
+from flask import Flask, render_template, request ,jsonify
+from app import app
 
-def detect_fb(username):
+@app.route('/detect_fraud_profile', methods=['POST'])
+def detect_fb():
+    data = request.get_json()
+    username = data.get('username') # Extract 'username' from the JSON payload
+    if not username:
+        return jsonify({'error': 'Username is required.'}), 400
+    
     base_url = "https://www.facebook.com/"
     url = base_url + username
 
@@ -189,6 +196,5 @@ def fetch_user_posts(page_url,username):
 
     return post_details
 
-
-
-detect_fb("gurudutt.sonsurkar")
+if __name__ == "__main__":
+    app.run(debug=True)

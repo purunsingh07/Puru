@@ -10,3 +10,4 @@ from app.tests.FraudDetection import instagramData
 from app.tests.FraudDetection import fraudPredict
 from app.model import openai
 from app.tests.FraudDetection import twitter
+from app.tests.FraudDetection import facebook
