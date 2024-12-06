@@ -220,7 +220,9 @@ document.getElementById("cyberreport").addEventListener('click', function () {
 document.getElementById("cyber").addEventListener('click', function () {
   window.location = "cyber"
 })
-
+document.getElementById("cyberhistory").addEventListener('click', function () {
+  window.location = "cyberhistory"
+})
 
 
 

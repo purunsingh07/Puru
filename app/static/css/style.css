@@ -395,3 +395,7 @@ select:focus{
     background-color: green;
     border-radius: 100px;
 }
+.button{
+    display: flex;
+    gap: 2;
+}
