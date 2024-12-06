@@ -70,7 +70,8 @@ def user_profile_information(url,username):
             "creation_date": data.get("creation_date"),
             "user_id": data.get("user_id"),
             "Name": data.get("about_me_text"),
-            "Username":username
+            "Username":username,
+            "Socialmediasite ": "Facebook",
         }
 
 

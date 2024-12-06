@@ -12,7 +12,7 @@ document.getElementById('btnStart').addEventListener('click', () => {
 });
 
 // Define global variables
-let Username, Name, Bio, Followers, Following, NumberOfPosts, Verified, AccountPrivacy;
+let Username, Name, Bio, Followers, Following, NumberOfPosts, Verified, AccountPrivacy,Socialmediasite;
 
 function fetch_data(jsonFilePath, retryCount = 5, retryInterval = 2000) {
     // Fetch the data
@@ -33,8 +33,12 @@ function fetch_data(jsonFilePath, retryCount = 5, retryInterval = 2000) {
                 Following,
                 NumberOfPosts,
                 Verified,
-                AccountPrivacy
+                AccountPrivacy,
+                Socialmediasite,
             } = data);
+
+
+            const img = `./${username}/${username}_profile/profile_pic.jpg`;
 
             // Log to verify
             console.log("Username:", Username);
@@ -45,6 +49,8 @@ function fetch_data(jsonFilePath, retryCount = 5, retryInterval = 2000) {
             console.log("Number of Posts:", NumberOfPosts);
             console.log("Verified:", Verified);
             console.log("Account Privacy:", AccountPrivacy);
+            console.log(img);
+            console.log(Socialmediasite);
         })
         .catch(error => {
             console.error(`Error fetching the JSON file: ${error.message}`);
@@ -85,9 +91,33 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
+function convertImageToBase64(imgUrl) {
+    return new Promise((resolve, reject) => {
+      // Fetch the image
+      fetch(imgUrl)
+        .then(response => response.blob()) // Convert to Blob
+        .then(blob => {
+          // Create a FileReader instance
+          const reader = new FileReader();
+          
+          // When the image is loaded as base64
+          reader.onloadend = () => {
+            resolve(reader.result); // This is the Base64 string
+          };
+          
+          // Read the Blob as Data URL (Base64)
+          reader.readAsDataURL(blob);
+        })
+        .catch(error => reject(error)); // Handle fetch errors
+    });
+  }
+
+
 document.getElementById("btnreport").addEventListener('click' ,async(e) =>{
     e.preventDefault();
+    const imgUrl = `./${username}/${username}_profile/profile_pic.jpg`;
     try {
+          const base64Image = await convertImageToBase64(imgUrl);
           await addDoc(collection(db, "reportedAccounts"), {
             
             Username : Username ,
@@ -100,6 +130,7 @@ document.getElementById("btnreport").addEventListener('click' ,async(e) =>{
             AccountPrivacy: AccountPrivacy,
             timestamp: serverTimestamp(),
             status: "Pending",
+            profileImage: base64Image,
           });
           alert("Account reported successfully!");
       } catch (error) {

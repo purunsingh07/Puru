@@ -120,6 +120,7 @@ def fetch_user_details(username):
             'default_profile_image': data['legacy'].get('profile_banner_url'),
             'NumberOfPosts': data['legacy'].get('media_count'),
             'profile_image_url_https': data['legacy'].get('profile_banner_url'),
+            "Socialmediasite ": "Twitter",
         }
         profile_dir = create_directory(os.path.join(os.getcwd(), username, f"{username}_profile"))
         profile_filepath = os.path.join(profile_dir, "profile_data.json")

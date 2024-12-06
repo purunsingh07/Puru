@@ -21,6 +21,7 @@ async function fetchAllDocuments() {
     const querySnapshot = await getDocs(collectionRef);
     querySnapshot.forEach(doc => {
       const accountData = doc.data();
+      const profileBase64Image = accountData.profileImage;
       const container = document.getElementById("card-container");
 
       // Create a new card element
@@ -31,7 +32,7 @@ async function fetchAllDocuments() {
       // Add HTML content for the new card
       newCard.innerHTML = `
         <div class="card-header">
-          <img src="https://via.placeholder.com/80" alt="Profile Picture" class="profile-pic" />
+          <img src= "${profileBase64Image}" alt="Profile Picture" class="profile-pic" />
           <div class="card-info">
             <h4>User ID: ${accountData.Username}</h4>
             <h3>Name: ${accountData.Name}</h3>
@@ -41,7 +42,7 @@ async function fetchAllDocuments() {
         <div class="card-body">
           <p><strong>Followers:</strong> ${accountData.Followers}</p>
           <p><strong>Following:</strong> ${accountData.Following}</p>
-          <p><strong>Social Media Site:</strong> Twitter</p>
+          <p><strong>Social Media Site:</strong> ${accountData.Platform}</p>
           <p><strong>Fake Account Type:</strong> spam</p>
           <p><strong>Fake Percentage:</strong> 33%</p>
           <p><strong>Status:</strong><span id="status-${doc.id}"> ${accountData.status || 'N/A'} </span></p>

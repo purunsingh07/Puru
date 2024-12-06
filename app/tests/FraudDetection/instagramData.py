@@ -152,6 +152,7 @@ def user_information_final(username):
         "Verified": "Yes" if data.get("is_verified") else "No",
         "AccountPrivacy": "Private" if data.get("is_private") else "Public",
         "Profile Picture Path": profile_pic(username),
+        "Socialmediasite ": "Instagram",
         "Posts": []
     }
 

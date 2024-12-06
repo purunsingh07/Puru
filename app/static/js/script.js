@@ -292,8 +292,8 @@ function collectCaptions(username, totalPosts) {
     }
 
     setTimeout(() => {
-        // fraudTest(username, totalPosts);
-        opentest(username);
+        fraudTest(username, totalPosts);
+        // opentest(username);
     }, totalPosts * 250 + 500);
 }
 
