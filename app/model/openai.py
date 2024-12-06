@@ -2,10 +2,10 @@ from flask import Flask, render_template, request ,jsonify
 import openai
 import json
 from app import app
+import os
 import requests
 # Set your OpenAI API key
 #  # Replace with your actual API key
-
 
 # Input query
 # query = """
@@ -43,7 +43,9 @@ def get_post_response_json():
         # Retrieve JSON data from the request
         query = request.get_json()
         user_info = query.get('userinformation', {})
-        
+        username = user_info["ProfileInfo"]["Username"]
+        print("username from open api:",username)
+
         # Make OpenAI API call
         response = openai.ChatCompletion.create(
             model=MODEL,
@@ -57,8 +59,17 @@ def get_post_response_json():
         response_content = response["choices"][0]["message"]["content"]
         # print("OpenAI Response:", response_content)
         
-        # Return the response as JSON
-        print(response_content)
+        base_dir = os.path.join(os.getcwd(), username)
+        os.makedirs(base_dir, exist_ok=True)
+
+        profile_dir = os.path.join(base_dir, f"{username}_profile")
+        os.makedirs(profile_dir, exist_ok=True)
+
+        output_path = os.path.join(profile_dir, "output_data.json")
+        with open(output_path, "w") as profile_info_file:
+            json.dump(response_content, profile_info_file, indent=4)
+
+
         return jsonify({"result": response_content})
     
     except Exception as e:

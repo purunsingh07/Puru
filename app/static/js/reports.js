@@ -54,3 +54,60 @@ async function fetchAndDisplayData() {
   }
   
 fetchAndDisplayData();
+
+
+//change theme
+changeTheme();
+
+let noOfPosts;
+
+
+
+function changeTheme() {
+    if (localStorage.getItem("ModeColor") == "dark") {
+        document.documentElement.style.setProperty('--light', "#2f3046")
+        document.documentElement.style.setProperty('--dark', "#14152a")
+        document.documentElement.style.setProperty('--material', "#1ABC9C")
+        document.documentElement.style.setProperty('--text', "#ffffff")
+        document.documentElement.style.setProperty('--darkText', "#ffffff")
+        document.documentElement.style.setProperty('--primary-bg1', "#2C2C3E")
+
+        document.getElementById("modeColor").className = "fa-solid fa-sun";
+    }
+    else {
+        document.documentElement.style.setProperty('--light', "#F8F9FA")
+        document.documentElement.style.setProperty('--dark', "#2C3E50")
+        document.documentElement.style.setProperty('--material', "#1ABC9C")
+        document.documentElement.style.setProperty('--text', "#ECF0F1")
+        document.documentElement.style.setProperty('--darkText', "black")
+        document.documentElement.style.setProperty('--primary-bg1', "#f7fefe")
+        
+
+
+        document.getElementById("modeColor").className = "fa-solid fa-moon";
+    }
+
+}
+
+document.getElementById("modeColor").addEventListener('click', function () {
+  changeMode();
+})
+
+function changeMode() {
+
+  if (localStorage.getItem("ModeColor") == "light") {
+      localStorage.setItem("ModeColor", "dark")
+      document.getElementById("modeColor").className = "fa-solid fa-sun";
+  }
+  else {
+      localStorage.setItem("ModeColor", "light")
+      document.getElementById("modeColor").className = "fa-solid fa-moon";
+  }
+
+  changeTheme();
+}
+
+
+document.getElementById("homeIcon").addEventListener('click', function () {
+  window.location = "/"
+})

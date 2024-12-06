@@ -11,9 +11,7 @@
      --material: #1abc9c;
      --text:#ecf0f1;
      --darkText: black;
-     --primary-bg1:#f8f9fa;
-     --select: white;
-     --Icon-bg: #2f3b49;
+     --primary-bg1:#f7fefe;
  }
 body {
     width: 100%;
@@ -22,7 +20,7 @@ body {
     user-select: none;
     color: var(--material);
     font-family: 'Open Sans';
-    overflow: hidden;
+    overflow: auto;
 }
 
 ::-webkit-scrollbar {
@@ -47,10 +45,13 @@ body {
 
 }
 
-#otherMenus{
+#otherMenus {
     display: flex;
     align-items: center;
     margin-left: -4.5%;
+    justify-content: space-evenly;
+    flex: 1;
+    margin-right: 6rem;
 }
 
 
@@ -109,7 +110,7 @@ body {
     border-radius: 10px;
     border: none;
     outline: none;
-    color: var(--lightText);
+    color: var(--darkText);
     background-color: var(--material);
     font-size: 17px;
     margin-left: auto;
@@ -158,6 +159,7 @@ i{
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: larger;
+    margin-left: 5rem;
 }
   
 
@@ -184,13 +186,13 @@ i{
   }
   
   th, td {
-    padding: 15px;
+    padding: 18px;
     text-align: left;
     border-bottom: 1px solid #ddd;
     font-size: large;
+    color: var(--darkText);
 }
   
   tbody tr:hover {
     background-color: #f1f1f1;
   }
-  
