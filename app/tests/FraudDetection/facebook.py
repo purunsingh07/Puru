@@ -71,7 +71,7 @@ def user_profile_information(url,username):
             "user_id": data.get("user_id"),
             "Name": data.get("about_me_text"),
             "Username":username,
-            "Socialmediasite ": "Facebook",
+            "Socialmediasite": "Facebook",
         }
 
 

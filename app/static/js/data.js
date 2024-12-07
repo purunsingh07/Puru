@@ -14,7 +14,7 @@ document.getElementById('btnStart').addEventListener('click', () => {
 // Define global variables
 let Username, Name, Bio, Followers, Following, NumberOfPosts, Verified, AccountPrivacy,Socialmediasite;
 
-function fetch_data(jsonFilePath, retryCount = 5, retryInterval = 2000) {
+function fetch_data(jsonFilePath, retryCount = 5, retryInterval = 10000) {
     // Fetch the data
     fetch(jsonFilePath)
         .then(response => {

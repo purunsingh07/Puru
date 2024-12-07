@@ -6,7 +6,6 @@ import os
 import requests
 # Set your OpenAI API key
 #  # Replace with your actual API key
-
 # Input query
 # query = """
 # cute_ishu_jattni
