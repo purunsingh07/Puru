@@ -187,7 +187,7 @@ def main(username):
         raw_user_details, processed_user_details = fetch_user_details(username)
 
         if raw_user_details and processed_user_details:
-            final_report = {"account_details": processed_user_details}
+            final_report = {"ProfileInfo": processed_user_details}
 
             user_id = raw_user_details.get("rest_id", None)
 

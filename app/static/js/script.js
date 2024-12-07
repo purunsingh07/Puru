@@ -319,7 +319,7 @@ async function opentest(username) {
         }
 
         const fraudResult = await fraudResultResponse.json();
-        // console.log(fraudResult);
+        console.log(fraudResult);
 
         // Optionally display the fraud test result
         // showFraudResult(fraudResult);
@@ -370,6 +370,7 @@ async function fraudTest(username, tw) {
 
 function displayResult(fraudResult) {
 
+    document.getElementById('progressData').innerHTML = ''
     console.log(fraudResult)
      let update1 = document.createElement('p');
      update1.className = 'progressStyle';
@@ -403,9 +404,9 @@ function displayUserProfile(username) {
 
                 }, 700);
             } 
-            // else {
-            //     console.error('Error: Number of posts not found in profile data.');
-            // }
+            else {
+                console.error('Error: Number of posts not found in profile data.');
+            }
         })
         .catch(error => console.error('Error fetching data:', error));
 }

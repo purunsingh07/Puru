@@ -10,8 +10,10 @@ from io import BytesIO
 @app.route('/detect_fraud_profile', methods=['POST'])
 def detect_fraud_profile():
     # Parse JSON from request
+
     data = request.get_json()
     username = data.get('username') # Extract 'username' from the JSON payload
+    print(f"Instagram Data {username} started 🌿🌿🌿")
     if not username:
         return jsonify({'error': 'Username is required.'}), 400
 

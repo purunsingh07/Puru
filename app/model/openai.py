@@ -16,28 +16,55 @@ import requests
 # Follow to see their photos and videos.
 # """
 
+
+
+
 # ------------------------------------------------------------
 # Providing the system prompt
 # ------------------------------------------------------------
 system_prompt = """
-    You are an AI model that detects the given  is profile fake or not based on the number of followers , following , bio , verified or not, username trying to impersonate some famous user names , from the post's caption events in real-time or in the past if the data , number of posts etc. You will be provided with the input of users social media profile information and posts and your goal is to respond with a structured solution in json format:
-    - Fake post detection:
-        1) Fake or propaganda information: (percentage out of 100)
-        2) Extremist: (percentage out of 100)
-        3) Spam message: (percentage out of 100)
-        4) Violent or hate speech or toxic: (percentage out of 100)
-        5) Impersonate account: (percentage out of 100)
-        6) Incomplete profile : (percentage out of 100)
-    Reason:
-        If the profile belongs to any of these 6 categories then why just in 10-20 words.
-    Conclusion: 
-        Just one precise summary point.
-        Percentage pf risk : (percentage out of 100)
+    You are an AI model that detects the given  is profile fake or not based on the number of followers , following , bio , verified or not, username trying to impersonate some famous user names , from the post's caption events in real-time or in the past if the data , number of posts etc. You will be provided with the input of users social media profile information and posts and your goal is to respond with a structured solution in this format:
+    <div class="final_output">
+        <h3> Fake post detection:<h3>
+        <table>
+            <tr>
+                <td>Fake or propaganda information</td>
+                <td><span class="propaganda">(percentage out of 100)</span></td>
+            </tr>
+            <tr>
+                <td>Extremist</td>
+                <td><span class="Extremist">(percentage out of 100)</span></td>
+            </tr>
+            <tr>
+                <td>Spam message</td>
+                <td><span class="Spam">(percentage out of 100)</span></td>
+            </tr>
+            <tr>
+                <td>Violent or hate speech or toxic</td>
+                <td><span class="hate">(percentage out of 100)</span></td>
+            </tr>
+            <tr>
+                <td>Impersonate account</td>
+                <td><span class="Impersonate">(percentage out of 100)</span></td>
+            </tr>
+            <tr>
+                <td>Incomplete profile</td>
+                <td><span class="Incomplete">(percentage out of 100)</span></td>
+            </tr>
+        </table>
+        <li>Percentage of risk :<span class="risk"> (percentage out of 100)</span></li>
+        <strong>Reason:</strong>
+            If the profile belongs to any of these 6 categories then why just in 10-20 words.
+        <strong>Conclusion: </strong>
+            Just one precise summary point.
+            
+            </div>
 """
 
 # Function to get the response
 @app.route('/openai', methods=['POST'])
 def get_post_response_json():
+    print("Model testing started 🌿")
     try:
         # Retrieve JSON data from the request
         query = request.get_json()
@@ -74,8 +101,6 @@ def get_post_response_json():
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
-    # return jsonify({'result': f"Data for '{username}' has been successfully processed."})
-
 
 # Fetch and print the response
 # try:
@@ -107,7 +132,7 @@ def get_post_response_json():
 #     4) Violent or hate speech or toxic: 0%
 
 # Reason:
-#     1) The post is primarily categorised as fake because there is no scientific evidence or credible research supporting that a synthetic material can make one immortal. Secondly, the idea of the medicine being created by the mass killing of humans is outrageous, unethical, and illegal. This suggests the spread of fear and misinformation.  
+#     1) The post is primarily categorized as fake because there is no scientific evidence or credible research supporting that a synthetic material can make one immortal. Secondly, the idea of the medicine being created by the mass killing of humans is outrageous, unethical, and illegal. This suggests the spread of fear and misinformation.  
 #     2) The post isn't particularly extremist, but it divides people based on wealth which can potentially incite class conflicts, therefore the low score.
 #     3) The element of spam is noticeable due to the sensationalistic nature of the post. The assertion of exclusivity and immortality could be a tactic to attract attention or clicks, often seen in spam messages.
 #     4) The post does not contain explicitly violent, hate speech or toxic content.
