@@ -28,14 +28,21 @@ def get_user_data(username):
     url = "https://instagram-scraper-api2.p.rapidapi.com/v1/info"
     querystring = {"username_or_id_or_url": username}
     headers = {
-    'x-rapidapi-key': "d65eb81e02mshd8f1eca29ba52b7p17caeajsn661881ae5f2c",
+    'x-rapidapi-key': "2e441ee7e4mshe67c27c1cc16b20p1a6c08jsn304da69448df",
     'x-rapidapi-host': "instagram-scraper-api2.p.rapidapi.com"
     }
     # fetching the data from the api
-    response = requests.get(url, headers=headers, params= querystring)
-    if response.status_code == 200:
-        return response.json()
-    return None
+    try:
+        response = requests.get(url, headers=headers, params=querystring, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        if 'data' in data:
+            return data
+        else:
+            return {"error": "Invalid response structure from API."}
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching user data: {e}")
+        return None
 
 
 # save the image to the device
@@ -80,42 +87,35 @@ def save_post_picture(img_url, username, post_index):
     # Return the relative path for use in the template
     return img_path
 
-# Function to fetch recent posts using Instagram scraper API
 def get_recent_posts(username):
     url = "https://instagram-scraper-api2.p.rapidapi.com/v1.2/posts"
     querystring = {"username_or_id_or_url": username}
     headers = {
-    'x-rapidapi-key': "d65eb81e02mshd8f1eca29ba52b7p17caeajsn661881ae5f2c",
-    'x-rapidapi-host': "instagram-scraper-api2.p.rapidapi.com"
-}
-    response = requests.get(url, headers=headers, params=querystring)
-    data = response.json()
-    posts = []
-    
-    if 'data' in data and 'items' in data['data']:
-        posts = data['data']['items'][:10]  # Only take the first 5 posts
+        'x-rapidapi-key': "2e441ee7e4mshe67c27c1cc16b20p1a6c08jsn304da69448df",
+        'x-rapidapi-host': "instagram-scraper-api2.p.rapidapi.com"
+    }
 
-        # Extract only required caption information
-        for post_index, post in enumerate(posts):
-            caption_info = post.get('caption', {})
-            post['caption_text'] = caption_info.get('text', 'No caption text available')
-            post['did_report_as_spam'] = caption_info.get('did_report_as_spam', "False")
-            post['created_at'] = caption_info.get('created_at', 'Unknown time')
-            del post['caption']  # Optionally remove the full caption data
+    try:
+        response = requests.get(url, headers=headers, params=querystring, timeout=10)
+        response.raise_for_status()
+        data = response.json()
 
-            image_versions = post.get('image_versions', {}).get('items', [])
-            if image_versions:
-                # Select the highest resolution image URL (based on the largest 'height' or 'width')
-                best_image = min(image_versions, key=lambda x: x['height'] if 'height' in x else x['width'])
-                post['image_url'] = best_image['url']
-            else:
-                post['image_url'] = None
-            img_url = post['image_url']
-            if img_url:
-                post['image_path'] = save_post_picture(img_url, username, post_index)
-        
-    return posts
-
+        if 'data' in data and 'items' in data['data']:
+            posts = data['data']['items'][:10]
+            for post_index, post in enumerate(posts):
+                # Process posts
+                post['caption_text'] = post.get('caption', {}).get('text', 'No caption text available')
+                post['created_at'] = post.get('created_at', 'Unknown time')
+                image_versions = post.get('image_versions', {}).get('items', [])
+                post['image_url'] = image_versions[0]['url'] if image_versions else None
+                if post['image_url']:
+                    post['image_path'] = save_post_picture(post['image_url'], username, post_index)
+            return posts
+        else:
+            return []
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching recent posts: {e}")
+        return []
 
 
 def profile_pic(username):
@@ -129,7 +129,9 @@ def profile_pic(username):
 
 def user_information_final(username):
     user_data = get_user_data(username)
-  
+    if not user_data or 'error' in user_data:
+        print(f"Error fetching user data for {username}")
+        return {"error": f"Unable to fetch data for username: {username}"}
 
     base_dir = os.path.join(os.getcwd(), username)
     os.makedirs(base_dir, exist_ok=True)
@@ -140,9 +142,6 @@ def user_information_final(username):
     profile_dir = os.path.join(base_dir, f"{username}_profile")
     os.makedirs(profile_dir, exist_ok=True)
 
-    if not user_data:
-        return {"error": f"Unable to fetch the data for the username: {username}"}
-    # Extract basic user information
     data = user_data.get('data', {})
     user_info = {
         "Username": data.get("username", "N/A"),
@@ -158,35 +157,26 @@ def user_information_final(username):
         "Posts": []
     }
 
-    posts = get_recent_posts(username)
-    captions = []
+    try:
+        posts = get_recent_posts(username)
+        user_info["Posts"] = posts
+    except Exception as e:
+        print(f"Error processing posts for {username}: {e}")
 
+    try:
+        captions = [{"PostNumber": i + 1, "Caption": post["caption_text"], "Upload Time": post["created_at"]}
+                    for i, post in enumerate(posts)]
+    except Exception as e:
+        print(f"Error processing captions for {username}: {e}")
+        captions = []
 
     profile_info_path = os.path.join(profile_dir, "profile_data.json")
     with open(profile_info_path, "w") as profile_info_file:
         json.dump(user_info, profile_info_file, indent=4)
 
-    for index, post in enumerate(posts, start=1):
-        post_info = {
-            "PostNumber": index,
-            "Caption": post.get("caption_text", "No caption text available") or "No captions available" ,
-            "Upload Time": post.get("created_at", "Unknown time"),
-        }
-        captions.append(post_info)
-
-    # save captions to captions.json
-    captions_path = os.path.join(caption_dir,"captions.json")
-    with open(captions_path,"w") as captions_file:
+    captions_path = os.path.join(caption_dir, "captions.json")
+    with open(captions_path, "w") as captions_file:
         json.dump(captions, captions_file, indent=4)
-
-    data = {
-    "ProfileInfo": user_info,
-    "Captions": captions,
-    }
-
-    data_path= os.path.join(profile_dir,"data.json")
-    with open(data_path,"w") as data_file:
-        json.dump(data,data_file,indent=4)
 
     return user_info
 

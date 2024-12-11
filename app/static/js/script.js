@@ -322,8 +322,8 @@ async function opentest(username) {
         console.log(fraudResult);
 
         // Optionally display the fraud test result
-        // showFraudResult(fraudResult);
-        displayResult(fraudResult)
+        showFraudResult(fraudResult);
+        // displayResult(fraudResult)
     } catch (error) {
         console.error('Error in opentest:', error);
     }
@@ -358,9 +358,9 @@ async function fraudTest(username, tw) {
         const fraudResult = await fraudResultResponse.json();
         console.log(fraudResult);
 
-        // showFraudResult(fraudResult.result)
+        showFraudResult(fraudResult.result)
 
-        displayResult(fraudResult)
+        // displayResult(fraudResult)
     } catch (error) {
         console.error('Error in fraudTest:', error);
     }
@@ -447,43 +447,43 @@ function dataErrorDisplay(data) {
 
 }
 
-// function showFraudResult(fraudPercent) {
+function showFraudResult(fraudPercent) {
 
-//     document.getElementById('progressData').innerHTML = ''
+    document.getElementById('progressData').innerHTML = ''
 
-//     let update1 = document.createElement('p')
-//     update1.className = 'progressStyle'
+    let update1 = document.createElement('p')
+    update1.className = 'progressStyle'
 
-//     update1.innerHTML = '🟡 ' + 'Detecting Frauds'
+    update1.innerHTML = '🟡 ' + 'Detecting Frauds'
 
-//     document.getElementById('progressData').appendChild(update1)
+    document.getElementById('progressData').appendChild(update1)
 
-//     setTimeout(() => {
+    setTimeout(() => {
 
-//         let update2 = document.createElement('h2')
-//         update2.className = 'fr1'
+        let update2 = document.createElement('h2')
+        update2.className = 'fr1'
 
-//         update2.innerHTML = 'Chances of Being Fraud'
+        update2.innerHTML = 'Chances of Being Fraud'
 
-//         document.getElementById('progressData').appendChild(update2)
+        document.getElementById('progressData').appendChild(update2)
 
-//         let update3 = document.createElement('h2');
-//         update3.className = 'fr2';
-//         update3.id = 'fri';
+        let update3 = document.createElement('h2');
+        update3.className = 'fr2';
+        update3.id = 'fri';
         
-//         if (Number(fraudPercent) > 50) {
-//             update3.style.backgroundColor = "red";
-//         }
+        if (Number(fraudPercent) > 50) {
+            update3.style.backgroundColor = "red";
+        }
         
-//         update3.innerHTML = Number(fraudPercent).toFixed(0) + '%'
+        update3.innerHTML = Number(fraudPercent).toFixed(0) + '%'
 
-//         document.getElementById('progressData').appendChild(update3)
+        document.getElementById('progressData').appendChild(update3)
 
 
-//     }, 2000);
+    }, 2000);
 
  
 
-// }
+}
 
 export { changeTheme };

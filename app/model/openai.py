@@ -18,7 +18,6 @@ import requests
 
 
 
-
 # ------------------------------------------------------------
 # Providing the system prompt
 # ------------------------------------------------------------
@@ -83,7 +82,7 @@ def get_post_response_json():
         
         # Extract response content
         response_content = response["choices"][0]["message"]["content"]
-        # print("OpenAI Response:", response_content)
+        print("Response:", response_content)
         
         base_dir = os.path.join(os.getcwd(), username)
         os.makedirs(base_dir, exist_ok=True)
@@ -101,40 +100,3 @@ def get_post_response_json():
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
-
-# Fetch and print the response
-# try:
-#     response = get_post_response_json(query)
-#     response_content = response["choices"][0]["message"]["content"]  # Extract response content
-#     print(response_content)  # Print the raw response
-# except Exception as e:
-#     print(f"Error: {e}")
-
-
-
-# - Fake post detection:
-#     1) Fake or propaganda information: 95%
-#     2) Extremist: 5%
-#     3) Spam message: 20%
-#     4) Violent or hate speech or toxic: 0%
-
-# Reason:
-#     1) The post is primarily categorised as fake because there is no scientific evidence or credible research supporting that a synthetic material can make one immortal. Secondly, the idea of the medicine being created by the mass killing of humans is outrageous, unethical, and illegal. This suggests the spread of fear and misinformation.
-#     2) Extremist: 5%
-#     3) Spam message: 20%
-#     2) Extremist: 5%
-#     3) Spam message: 20%
-#     2) Extremist: 5%
-#     2) Extremist: 5%
-#     3) Spam message: 20%
-#     4) Violent or hate speech or toxic: 0%
-
-#     4) Violent or hate speech or toxic: 0%
-
-# Reason:
-#     1) The post is primarily categorized as fake because there is no scientific evidence or credible research supporting that a synthetic material can make one immortal. Secondly, the idea of the medicine being created by the mass killing of humans is outrageous, unethical, and illegal. This suggests the spread of fear and misinformation.  
-#     2) The post isn't particularly extremist, but it divides people based on wealth which can potentially incite class conflicts, therefore the low score.
-#     3) The element of spam is noticeable due to the sensationalistic nature of the post. The assertion of exclusivity and immortality could be a tactic to attract attention or clicks, often seen in spam messages.
-#     4) The post does not contain explicitly violent, hate speech or toxic content.
-
-# Conclusion: The post is largely a fake news or misinformation containing sensational claims without any scientific credibility and possibly designed to attract attention or incite unnecessary fear and discord.
