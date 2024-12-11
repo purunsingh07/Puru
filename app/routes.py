@@ -43,3 +43,7 @@ def cyberreport():
 def cyberhistory():
     return render_template('cyberhistory.html')
 
+@app.route('/multipledata')
+def multipledata():
+    return render_template('multipledata.html')
+

@@ -1,212 +1,456 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imposter</title>
 
+  <script src="https://kit.fontawesome.com/6cc1a5eb9c.js" crossorigin="anonymous"></script>
 
-    <style>
-        
-.final_output {
-    font-family: 'Arial', sans-serif;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 25px;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+  <link rel="stylesheet" href="/static/css/reports.css" />
 
-.final_output h3 {
-    color: #333;
-    border-bottom: 2px solid #4a4a4a;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.final_output ol {
-    list-style-type: none;
-    padding: 0;
-}
-
-.final_output ol li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 15px;
-    margin-bottom: 8px;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: background-color 0.3s ease;
-}
-
-.final_output ol li:hover {
-    background-color: #f0f0f0;
-}
-
-/* Span styles for percentages */
-.final_output span {
-    font-weight: bold;
-    color: #555;
-    background-color: #e9ecef;
-    padding: 5px 10px;
-    border-radius: 15px;
-    min-width: 80px;
-    text-align: center;
-    display: inline-block;
-}
-
-.final_output .propaganda { color: #dc3545; }
-.final_output .Extremist { color: #fd7e14; }
-.final_output .Spam { color: #6c757d; }
-.final_output .hate { color: #d63384; }
-.final_output .Impersonate { color: #0d6efd; }
-.final_output .Incomplete { color: #198754; }
-
-/* Strong label styles */
-.final_output strong {
-    display: block;
-    margin: 15px 0 10px;
-    color: #495057;
-    font-size: 16px;
-    border-left: 4px solid #4a4a4a;
-    padding-left: 10px;
-}
-
-.final_output .risk {
-    font-size: 1.2em;
-    color: #ffffff;
-    background-color: #007bff;
-    padding: 8px 15px;
-    border-radius: 20px;
-    display: inline-block;
-    margin-top: 10px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-    .final_output {
-        margin: 10px;
-        padding: 15px;
-    }
-
-    .final_output ol li {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .final_output span {
-        margin-top: 5px;
-        width: 100%;
-        text-align: center;
-    }
-}
-
-
-
-.final_output {
-    width: 100%;
-    max-width: 700px;
-    margin: 20px auto;
-    border-collapse: collapse;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.final_output table {
-    width: 100%;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.final_output table tr {
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.final_output table tr:last-child {
-    border-bottom: none;
-}
-
-.final_output table td {
-    padding: 12px 15px;
-    font-size: 14px;
-}
-
-.final_output table tr td:first-child {
-    font-weight: 600;
-    width: 50%;
-}
-
-.final_output table tr td:last-child {
-    text-align: left;
-    font-family: monospace;
-}
-
-.final_output .risk {
-    font-weight: bold;
-    font-size: 16px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-    .final_output {
-        margin: 10px;
-    }
-
-    .final_output table td {
-        padding: 8px 10px;
-        font-size: 12px;
-    }
-}
-
-/* mode output end */
-    </style>
+  <link rel="shortcut icon" href="/static/images/appLogo.png" type="image/x-icon" />
 </head>
+
 <body>
-    <div class="final_output>
-        <br>
-        <h3>- Fake post detection:<h3>
-        <div class="final_output">
-        <table>
-            <tr>
-                <td>Fake or propaganda information</td>
-                <td><span class="propaganda">(percentage out of 100)</span></td>
-            </tr>
-            <tr>
-                <td>Extremist</td>
-                <td><span class="Extremist">(percentage out of 100)</span></td>
-            </tr>
-            <tr>
-                <td>Spam message</td>
-                <td><span class="Spam">(percentage out of 100)</span></td>
-            </tr>
-            <tr>
-                <td>Violent or hate speech or toxic</td>
-                <td><span class="hate">(percentage out of 100)</span></td>
-            </tr>
-            <tr>
-                <td>Impersonate account</td>
-                <td><span class="Impersonate">(percentage out of 100)</span></td>
-            </tr>
-            <tr>
-                <td>Incomplete profile</td>
-                <td><span class="Incomplete">(percentage out of 100)</span></td>
-            </tr>
-        </table>
+
+  <div id="topBar">
+
+    <div id="appLogo">
+      <img id="appL1" src="/static/images/appLogo.png" alt="">
+      <h1 id="appT">Imposter</h1>
     </div>
-    <br>
-    <br>
-        <strong>Reason:</strong>
-            If the profile belongs to any of these 6 categories then why just in 10-20 words.
-            <br>
-        <strong>Conclusion: </strong>
-            Just one precise summary point.
-            <br>
-            <li>Percentage of risk :<span class="risk"> (percentage out of 100)</span></li>
-    
-            </div>
+
+    <div id="otherMenus">
+      <a class="aM" id="homeIcon" href="#">Home</a>
+      <a class="aM" href="#">About us</a>
+
+      <div class="dropdown">
+        <button id="a1" class="dropbtn">Detection Tests <i class="fas fa-caret-down"></i></button>
+        <div class="dropdown-content">
+          <a href="#">Profile Completeness Test</a>
+          <a href="#">Activity Anomaly Test</a>
+          <a href="#">Content Analysis Test</a>
+          <a href="#">Image Authenticity Test</a>
+          <a href="#">Social Network Analysis</a>
+          <a href="#">Full Profile Test</a>
+          <a id="impTest" href="#">Bot or Automation Test</a>
+        </div>
+      </div>
+
+      <a class="aM" id="Reports" href="#">Reports</a>
+      <i id="modeColor" class="fa-solid fa-moon"></i>
+
+    </div>
+
+  </div>
+  <div class="reportd">
+    <div class="container">
+      <input type="text" id="dp" placeholder="Search for Accounts">    
+      <button class="filter-btn" id="whole">search</button>
+
+
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>SR. No</th>
+            <th>Profile Picture</th>
+            <th>Full Name</th>
+            <th>Username</th>
+            <th>User ID</th>
+            <th>Private</th>
+            <th>Verified</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td>1</td>
+            <td>
+              <img src="static/profile_pics\1.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Satyam Kraft</td>
+            <td>satyam_kraft_official</td>
+            <td>53432729599</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>2</td>
+            <td>
+              <img src="static/profile_pics\2.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>🖤THE SM FAMILY 🖤 100K👇</td>
+            <td>satyam.mishra.meja_100k</td>
+            <td>37872593896</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>3</td>
+            <td>
+              <img src="static/profile_pics\3.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>🚩🚩सत्यम प्रताप सिंह गड़वाल 🚩🚩</td>
+            <td>attitude_ka_baap_satyam_</td>
+            <td>59182735887</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>4</td>
+            <td>
+              <img src="static/profile_pics\4.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>^satyam^</td>
+            <td>satyam_xx_official</td>
+            <td>64219659856</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>5</td>
+            <td>
+              <img src="static/profile_pics\5.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>सत्यम पांढरे 🦅⚜️</td>
+            <td>satyam_pandhare_sp</td>
+            <td>7896072481</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>6</td>
+            <td>
+              <img src="static/profile_pics\6.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Satyam 👑</td>
+            <td>satyam_antu_03</td>
+            <td>68542862204</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>7</td>
+            <td>
+              <img src="static/profile_pics\7.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Yash</td>
+            <td>satyam</td>
+            <td>433507</td>
+            <td>Yes</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>8</td>
+            <td>
+              <img src="static/profile_pics\8.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>जा8व  जी</td>
+            <td>satyam_official_2007</td>
+            <td>60452488569</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>9</td>
+            <td>
+              <img src="static/profile_pics\9.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Satyam Actor</td>
+            <td>satyam.actor1619</td>
+            <td>66737471518</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>10</td>
+            <td>
+              <img src="static/profile_pics\10.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Satyam Babu</td>
+            <td>satyam_babu_official</td>
+            <td>54617469485</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>11</td>
+            <td>
+              <img src="static/profile_pics\11.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>ＳＡＴＹＡＭ</td>
+            <td>s.s_satyam_singh</td>
+            <td>4067748038</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>12</td>
+            <td>
+              <img src="static/profile_pics\12.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Devid Satyam</td>
+            <td>_cute_devid_01</td>
+            <td>45224998891</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>13</td>
+            <td>
+              <img src="static/profile_pics\13.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Rajnikant Ram</td>
+            <td>satyam_yt_8860</td>
+            <td>62312143986</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>14</td>
+            <td>
+              <img src="static/profile_pics\14.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>🖤 メB A B Uメ 🖤</td>
+            <td>satyam_official_0148</td>
+            <td>51608219373</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>15</td>
+            <td>
+              <img src="static/profile_pics\15.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>👑🦅..y..a..m..r..a..j  R..👩🏻‍🦳  s..a..t..y..a..m..��🦾<</td>
+            <td>yamraaj_satyam_01</td>
+            <td>51009834029</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>16</td>
+            <td>
+              <img src="static/profile_pics\16.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Satyam Property Consultancy ®🏡</td>
+            <td>satyampropertyconsultancy</td>
+            <td>44963963697</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>17</td>
+            <td>
+              <img src="static/profile_pics\17.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>𝐀𝐑𝐎𝐑𝐀 🔞</td>
+            <td>satyam_0399</td>
+            <td>22931098042</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>18</td>
+            <td>
+              <img src="static/profile_pics\18.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Satyam Sahu</td>
+            <td>satyam_sahu_ji_76</td>
+            <td>64154978579</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>19</td>
+            <td>
+              <img src="static/profile_pics\19.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Satyam Sahani</td>
+            <td>satyam.nishad_sarkar.7777</td>
+            <td>38783644343</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>20</td>
+            <td>
+              <img src="static/profile_pics\20.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>SATYAM SHARMA</td>
+            <td>satyam_sharma_22</td>
+            <td>4160816797</td>
+            <td>No</td>
+            <td>Yes</td>
+          </tr>
+
+          <tr>
+            <td>21</td>
+            <td>
+              <img src="static/profile_pics\21.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Satyam Yadav</td>
+            <td>sk6gears</td>
+            <td>67236813209</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>22</td>
+            <td>
+              <img src="static/profile_pics\22.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>❤️‍🩹satyam soni 😎🥰</td>
+            <td>khapiter___08</td>
+            <td>5819244539</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>23</td>
+            <td>
+              <img src="static/profile_pics\23.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Satyam Gupta Gupta</td>
+            <td>satyam_gupta_30k</td>
+            <td>58693974676</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>24</td>
+            <td>
+              <img src="static/profile_pics\24.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Trending Satyam Sitamrahi</td>
+            <td>satyam_motivation_gk</td>
+            <td>63044115920</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>25</td>
+            <td>
+              <img src="static/profile_pics\25.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Satyam</td>
+            <td>rdx_satyam_02</td>
+            <td>62381757638</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>26</td>
+            <td>
+              <img src="static/profile_pics\26.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>                            SATYAM KAJLA</td>
+            <td>satyam_kajla</td>
+            <td>1906643750</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>27</td>
+            <td>
+              <img src="static/profile_pics\27.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Satyam Sarkar</td>
+            <td>king_star__satyam</td>
+            <td>57380698690</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>28</td>
+            <td>
+              <img src="static/profile_pics\28.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Satyam Textiles</td>
+            <td>sarees_satyam</td>
+            <td>10730981201</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>29</td>
+            <td>
+              <img src="static/profile_pics\29.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>🆂🅰🆃🆈🅰🅼🆂🅰🅽🅶🅴🅴🆃🅰</td>
+            <td>satyamsangeeta___14</td>
+            <td>49740043403</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>30</td>
+            <td>
+              <img src="static/profile_pics\30.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>Satyam Chaudhary</td>
+            <td>satyam_rox</td>
+            <td>1955454709</td>
+            <td>Yes</td>
+            <td>No</td>
+          </tr>
+
+          <tr>
+            <td>31</td>
+            <td>
+              <img src="static/profile_pics\31.jpg" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>SATYAM 🔥</td>
+            <td>satyam_gkp_01</td>
+            <td>64582409096</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+  </div> -->
+
+
+  <table id="table">
+    <tbody id="table-body"></tbody>
+</table>
+<div id="message" style="display: none;"></div>
+
+
+  <script type="module" src="/static/js/wholeinsta.js"></script>       
 </body>
+
 </html>

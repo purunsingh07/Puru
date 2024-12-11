@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Imposter</title>
+
+  <script src="https://kit.fontawesome.com/6cc1a5eb9c.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css') }}" />
+
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/appLogo.png')}}" type="image/x-icon" />
+</head>
+
+<body>
+
+  <div id="topBar">
+
+    <div id="appLogo">
+      <img id="appL1" src="{{ url_for('static', filename='images/appLogo.png')}}" alt="">
+      <h1 id="appT">Imposter</h1>
+    </div>
+
+    <div id="otherMenus">
+      <a class="aM" id="homeIcon" href="#">Home</a>
+      <a class="aM" href="#">About us</a>
+
+      <div class="dropdown">
+        <button id="a1" class="dropbtn">Detection Tests <i class="fas fa-caret-down"></i></button>
+        <div class="dropdown-content">
+          <a href="#">Profile Completeness Test</a>
+          <a href="#">Activity Anomaly Test</a>
+          <a href="#">Content Analysis Test</a>
+          <a href="#">Image Authenticity Test</a>
+          <a href="#">Social Network Analysis</a>
+          <a href="#">Full Profile Test</a>
+          <a id="impTest" href="#">Bot or Automation Test</a>
+        </div>
+      </div>
+
+      <a class="aM" id="Reports" href="#">Reports</a>
+      <i id="modeColor" class="fa-solid fa-moon"></i>
+
+    </div>
+
+  </div>
+
+  <div class="reportd">
+    <div class="container">
+      <input type="text" id="dp" placeholder="Search for Accounts">
+      <button class="filter-btn" id="whole">search</button>
+
+      {% if results %}
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>SR. No</th>
+            <th>Profile Picture</th>
+            <th>Full Name</th>
+            <th>Username</th>
+            <th>User ID</th>
+            <th>Private</th>
+            <th>Verified</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in results %}
+          <tr>
+            <td>{{ user.index }}</td>
+            <td>
+              <img src="{{ user.profile_pic_url }}" alt="Profile Picture" class="profile-pic" onerror="this.src='/static/default_placeholder.jpg';">
+            </td>
+            <td>{{ user.full_name }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.id }}</td>
+            <td>{{ 'Yes' if user.is_private else 'No' }}</td>
+            <td>{{ 'Yes' if user.is_verified else 'No' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p>No results available. Please perform a search to fetch data.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <script type="module" src="{{ url_for('static', filename='js/wholeinsta.js')}}"></script>
+</body>
+
+</html>

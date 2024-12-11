@@ -93,3 +93,9 @@ document.getElementById('googleLogin').addEventListener('click', async () => {
     }
 });
 
+document.getElementById("bb").addEventListener('click',function(){
+    window.location="/"
+})
+document.getElementById("cc").addEventListener('click',function(){
+    window.location="multipledata"
+})

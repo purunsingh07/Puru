@@ -28,7 +28,7 @@ def get_user_data(username):
     url = "https://instagram-scraper-api2.p.rapidapi.com/v1/info"
     querystring = {"username_or_id_or_url": username}
     headers = {
-    'x-rapidapi-key': "2e441ee7e4mshe67c27c1cc16b20p1a6c08jsn304da69448df",
+    'x-rapidapi-key': "fac4d0bfafmsh7ba7dc25cf7f672p171390jsn9eb840d95c5f",
     'x-rapidapi-host': "instagram-scraper-api2.p.rapidapi.com"
     }
     # fetching the data from the api
@@ -78,7 +78,7 @@ def save_post_picture(img_url, username, post_index):
     os.makedirs(post_dir, exist_ok=True)
 
     img_data = requests.get(img_url).content
-    img_filename = f'{username}_post_{post_index + 1}.jpg'
+    img_filename = f'{username}post{post_index + 1}.jpg'
     img_path = os.path.join(base_dir,post_dir , img_filename)
     os.makedirs(os.path.dirname(img_path), exist_ok=True)  
     with open(img_path, 'wb') as file:
@@ -91,7 +91,7 @@ def get_recent_posts(username):
     url = "https://instagram-scraper-api2.p.rapidapi.com/v1.2/posts"
     querystring = {"username_or_id_or_url": username}
     headers = {
-        'x-rapidapi-key': "2e441ee7e4mshe67c27c1cc16b20p1a6c08jsn304da69448df",
+        'x-rapidapi-key': "fac4d0bfafmsh7ba7dc25cf7f672p171390jsn9eb840d95c5f",
         'x-rapidapi-host': "instagram-scraper-api2.p.rapidapi.com"
     }
 
@@ -112,6 +112,13 @@ def get_recent_posts(username):
                     post['image_path'] = save_post_picture(post['image_url'], username, post_index)
             return posts
         else:
+             # Process posts
+            post['caption_text'] = "No captions available [PRIVATE ACCOUNT]"
+            post['created_at'] = "00:00:00"
+            image_versions = "None"
+            post['image_url'] = "https://imgs.search.brave.com/H_IRfXZLA3FRxAVtAKPqIS5DfURLF3rO6lChAP9LPs8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLmd1/aW0uY28udWsvaW1n/L21lZGlhLzIyZTMy/YzFiMWRlNDBlZDcx/MDNlMmUyZTg5OTVi/NzQyYWM2MDBiZDYv/NzBfMF83MTdfNDMw/L21hc3Rlci83MTcu/anBnP3dpZHRoPTQ0/NSZkcHI9MSZzPW5v/bmUmY3JvcD1ub25l"
+            if post['image_url']:
+                post['image_path'] = save_post_picture(post['image_url'], username, post_index)
             return []
     except requests.exceptions.RequestException as e:
         print(f"Error fetching recent posts: {e}")
@@ -157,18 +164,30 @@ def user_information_final(username):
         "Posts": []
     }
 
-    try:
-        posts = get_recent_posts(username)
-        user_info["Posts"] = posts
-    except Exception as e:
-        print(f"Error processing posts for {username}: {e}")
+
 
     try:
-        captions = [{"PostNumber": i + 1, "Caption": post["caption_text"], "Upload Time": post["created_at"]}
-                    for i, post in enumerate(posts)]
+        posts = get_recent_posts(username)
+    except Exception as e:
+        print(f"Error processing posts for {username}: {e}")
+        user_info["Posts"] = [{
+            "PostNumber": 0,
+            "Caption": "No captions available [PRIVATE ACCOUNT]",
+            "Upload Time": "00:00:00",
+            "Image Path": "https://imgs.search.brave.com/H_IRfXZLA3FRxAVtAKPqIS5DfURLF3rO6lChAP9LPs8/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLmd1/aW0uY28udWsvaW1n/L21lZGlhLzIyZTMy/YzFiMWRlNDBlZDcx/MDNlMmUyZTg5OTVi/NzQyYWM2MDBiZDYv/NzBfMF83MTdfNDMw/L21hc3Rlci83MTcu/anBnP3dpZHRoPTQ0/NSZkcHI9MSZzPW5v/bmUmY3JvcD1ub25l"  # Placeholder image URL
+    }]
+
+    try:
+        captions = [
+            {"PostNumber": i + 1, "Caption": post.get("caption_text", "No caption available"), "Upload Time": post.get("created_at", "Unknown time")}
+            for i, post in enumerate(posts)
+        ]
     except Exception as e:
         print(f"Error processing captions for {username}: {e}")
-        captions = []
+        captions = [
+            {"PostNumber": 0, "Caption": "No captions available [PRIVATE ACCOUNT]", "Upload Time": "00:00:00"}
+        ]
+
 
     profile_info_path = os.path.join(profile_dir, "profile_data.json")
     with open(profile_info_path, "w") as profile_info_file:
@@ -178,32 +197,21 @@ def user_information_final(username):
     with open(captions_path, "w") as captions_file:
         json.dump(captions, captions_file, indent=4)
 
+    limited_captions = captions[:4]
+
+
+    data = {
+    "ProfileInfo": user_info,
+    "Captions": limited_captions,
+    }
+
+    data_path= os.path.join(profile_dir,"data.json")
+    with open(data_path,"w") as data_file:
+        json.dump(data,data_file,indent=4)
+
+    
+
     return user_info
-
-
-
-
-# @app.route("/instagram", methods=["GET","POST"])
-# def index():
-#     if request.method == "POST":
-#         username = request.form["username"]
-
-#         # fetch user data
-#         user_data = get_user_data(username)
-        
-#         if user_data:
-#             profile_pic_url = user_data['data']['profile_pic_url']
-#             username = user_data['data']['username']
-#             # save the profile pic locally
-#             profile_pic_path = save_profile_picture(profile_pic_url, username)
-#             # fetch the recent posts
-#             posts  = get_recent_posts(username)
-#             return render_template("index.html",data=user_data, profile_pic =  profile_pic_path , posts = posts)
-#         else:
-#             return f"Error:unable to fetch the data for the {username}",400
-        
-#     return render_template("index.html", data=None,profile_pic= None, posts = None )
-        
+      
 if __name__ == "__main__":
     app.run(debug=True)
-

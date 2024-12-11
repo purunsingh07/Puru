@@ -292,6 +292,7 @@ function collectCaptions(username, totalPosts) {
     }
 
     setTimeout(() => {
+        // totalPosts=10;
         // fraudTest(username, totalPosts);
         opentest(username);
     }, totalPosts * 250 + 500);
@@ -322,8 +323,8 @@ async function opentest(username) {
         console.log(fraudResult);
 
         // Optionally display the fraud test result
-        showFraudResult(fraudResult);
-        // displayResult(fraudResult)
+        // showFraudResult(fraudResult);
+        displayResult(fraudResult)
     } catch (error) {
         console.error('Error in opentest:', error);
     }
@@ -358,9 +359,9 @@ async function fraudTest(username, tw) {
         const fraudResult = await fraudResultResponse.json();
         console.log(fraudResult);
 
-        showFraudResult(fraudResult.result)
+        // showFraudResult(fraudResult.result)
 
-        // displayResult(fraudResult)
+        displayResult(fraudResult)
     } catch (error) {
         console.error('Error in fraudTest:', error);
     }
@@ -487,3 +488,6 @@ function showFraudResult(fraudPercent) {
 }
 
 export { changeTheme };
+
+
+

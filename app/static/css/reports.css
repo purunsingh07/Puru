@@ -152,7 +152,7 @@ i{
     margin: 10px;
   }
   
-#searchBar {
+#searchBar, #dp {
     padding: 10px;
     width: 80%;
     margin-bottom: 20px;
