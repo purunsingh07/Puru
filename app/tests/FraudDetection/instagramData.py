@@ -60,6 +60,9 @@ def save_profile_picture(url, username):
     img_path = os.path.join(base_dir,profile_dir, img_filename) 
     os.makedirs(os.path.dirname(img_path), exist_ok=True)
 
+
+
+
     with open(img_path,'wb') as file:
         file.write(img_data)
      

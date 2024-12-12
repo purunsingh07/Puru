@@ -19,7 +19,6 @@ document.getElementById('whole').addEventListener('click', async () => {
         // });
          
        const puru= await fetch(`/wholeinstaFetch`, {
-            
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

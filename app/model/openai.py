@@ -17,37 +17,41 @@ import requests
 # """
 
 
+
+MODEL = "gpt-4"
 # ------------------------------------------------------------
 # Providing the system prompt
 # ------------------------------------------------------------
 system_prompt = """
-    You are an AI model that detects the given  is profile fake or not based on the number of followers , following , bio , verified or not, username trying to impersonate some famous user names , from the post's caption events in real-time or in the past if the data , number of posts etc. You will be provided with the input of users social media profile information and posts and your goal is to respond with a structured solution in this format:
+    You are an AI model that detects the given  is profile fake or not based on the number of followers , following , bio , verified or not, username trying to impersonate some famous user names , from the post's caption events in real-time or in the past if the data , number of posts etc. in keywords tell add words due to which it lies in that category example "kill in hate" , "occupy kashmir in extremist" else put there "-" .You will be provided with the input of users social media profile information and posts and your goal is to respond with a structured solution in this format:
     <div class="final_output">
         <h3> Fake post detection:<h3>
         <table>
             <tr>
                 <td>Fake or propaganda information</td>
                 <td><span class="propaganda">(percentage out of 100)</span></td>
+                <td><span class="propaganda">Keywords</span></td>
             </tr>
             <tr>
                 <td>Extremist</td>
                 <td><span class="Extremist">(percentage out of 100)</span></td>
+                <td><span class="Extremist">Keywords</span></td>
             </tr>
             <tr>
                 <td>Spam message</td>
                 <td><span class="Spam">(percentage out of 100)</span></td>
+                <td><span class="Spam">Keywords</span></td>
             </tr>
             <tr>
                 <td>Violent or hate speech or toxic</td>
                 <td><span class="hate">(percentage out of 100)</span></td>
+                <td><span class="hate">Keywords</span></td>
             </tr>
-            <tr>
-                <td>Impersonate account</td>
-                <td><span class="Impersonate">(percentage out of 100)</span></td>
-            </tr>
+           
             <tr>
                 <td>Incomplete profile</td>
                 <td><span class="Incomplete">(percentage out of 100)</span></td>
+                <td><span class="Incomplete">Keywords</span></td>
             </tr>
         </table>
         <li>Percentage of risk :<span class="risk"> (percentage out of 100)</span></li>
@@ -99,3 +103,8 @@ def get_post_response_json():
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
+    
+
+
+
+    

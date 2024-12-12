@@ -6,10 +6,9 @@ import os
 
 app = Flask(__name__)
 
-base_dir = os.path.join(os.getcwd(), "wholedata")
-os.makedirs(base_dir, exist_ok=True)
 
-PROFILE_PIC_DIR = base_dir
+
+PROFILE_PIC_DIR = 'static/profile_pics'
 os.makedirs(PROFILE_PIC_DIR, exist_ok=True)
 
 def download_image(url, filename):
@@ -30,25 +29,13 @@ def download_image(url, filename):
 
 
 
-@app.route('/wholeinstaFetch', methods=['POST'])
-def wholeinstaFetch():
-    try:
-        data = request.get_json()
-        username = data.get('username')
-        results = index(username)
-        return {"results": results}, 200
-    except Exception as e:
-        return {"error": str(e)}, 500
-
-
+@app.route('/', methods=['GET', 'POST'])
 def index():
     results = []
     error_message = None
 
     if request.method == 'POST':
         name = request.form.get('name')
-
-        print("Name :", name , "🌿🌿🌿🌿🌿🌿🌿🌿")
         
         # API request headers
         headers = {
@@ -115,7 +102,9 @@ def index():
             # Print full traceback for detailed debugging
             traceback.print_exc()
 
-    return results
+    return render_template('index.html', results=results, error_message=error_message)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
