@@ -78,7 +78,7 @@ def save_post_picture(img_url, username, post_index):
     os.makedirs(post_dir, exist_ok=True)
 
     img_data = requests.get(img_url).content
-    img_filename = f'{username}post{post_index + 1}.jpg'
+    img_filename = f'{username}_post_{post_index + 1}.jpg'
     img_path = os.path.join(base_dir,post_dir , img_filename)
     os.makedirs(os.path.dirname(img_path), exist_ok=True)  
     with open(img_path, 'wb') as file:

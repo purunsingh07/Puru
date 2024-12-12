@@ -18,27 +18,24 @@
   <div id="topBar">
 
     <div id="appLogo">
+      <button id="menuIcon"><i class="fa-solid fa-bars"></i></button>
       <img id="appL1" src="{{ url_for('static', filename='images/appLogo.png')}}" alt="">
       <h1 id="appT">Imposter</h1>
     </div>
+
+    <div id="dropdownOtherMenus">
+      <div id="closeDropdown">Close &#10006;</div>
+      <a href="#">Home</a>
+      <a href="#">About us</a>
+      <a href="#">Reports</a>
+  </div>
 
     <div id="otherMenus">
       <a class="aM" id="homeIcon" href="#">Home</a>
       <a class="aM" href="#">About us</a>
 
 
-      <div class="dropdown">
-        <button id="a1" class="dropbtn">Detection Tests <i class="fas fa-caret-down"></i></button>
-        <div class="dropdown-content">
-          <a href="#">Profile Completeness Test</a>
-          <a href="#">Activity Anomaly Test</a>
-          <a href="#">Content Analysis Test</a>
-          <a href="#">Image Authenticity Test</a>
-          <a href="#">Social Network Analysis</a>
-          <a href="#">Full Profile Test</a>
-          <a id="impTest" href="#">Bot or Automation Test</a>
-        </div>
-      </div>
+      
 
       <a class="aM" id="Reports" href="#">Reports</a>
       <i id="modeColor" class="fa-solid fa-moon"></i>

@@ -47,3 +47,12 @@ def cyberhistory():
 def multipledata():
     return render_template('multipledata.html')
 
+
+@app.route('/multipledata', methods=['POST'])
+def multiple_data():
+    data = request.form.to_dict()  # Access form data
+    print("Received Data:", data)
+    return render_template('multipledata.html')
+
+
+
